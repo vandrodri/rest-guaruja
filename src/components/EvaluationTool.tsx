@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 import { Button } from './Button'; // OK (estão na mesma pasta)
 import { analyzeRestaurantPresence } from './aiService'; // MUDOU: tire os .. e a pasta services
-import { EvaluationStep } from '../types'; // OK: sobe um nível para achar o types.ts na src
+import { EvaluationStep } from '../types';
 
 export const EvaluationTool: React.FC = () => {
-  const [step, setStep] = useState<EvaluationStep>(EvaluationStep.IDLE);
-  const [restaurantName, setRestaurantName] = useState('');
+const [step, setStep] = useState<EvaluationStepType>(EvaluationStep.Input);
+    const [restaurantName, setRestaurantName] = useState('');
   const [analysis, setAnalysis] = useState('');
   const [progress, setProgress] = useState(0);
 

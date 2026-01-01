@@ -139,14 +139,20 @@ const App: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 md:py-20 bg-[#e0e0e0] border-t border-zinc-300 px-4">
-        <div className="max-w-7xl mx-auto text-center space-y-8">
-          <span className="font-black text-2xl tracking-tighter uppercase italic text-zinc-300">ZMaps Guarujá</span>
-          <p className="text-zinc-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">
-            © {new Date().getFullYear()} ZMaps.
-          </p>
+      {/* Tool Section */}
+      <section id="avaliar" className="py-12 md:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 md:mb-20 space-y-4">
+            <h2 className="text-3xl md:text-6xl font-black uppercase italic text-zinc-900">Pare de adivinhar.</h2>
+          </div>
+          <div className="w-full overflow-hidden">
+             <EvaluationTool />
+          </div>
         </div>
-      </footer>
+      </section>
+
+      {/* RODAPÉ PROFISSIONAL ZAPY */}
+      <Footer />
     </div>
   );
 };

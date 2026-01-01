@@ -57,7 +57,7 @@ export const EvaluationTool: React.FC = () => {
               value={restaurantName}
               onChange={(e) => setRestaurantName(e.target.value)}
               required
-              autoFocus
+            
             />
             <Button type="submit" fullWidth>
               AVALIAR MEU RESTAURANTE AGORA

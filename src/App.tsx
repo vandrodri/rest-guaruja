@@ -12,13 +12,36 @@ const App: React.FC = () => {
     <div className="min-h-screen selection:bg-blue-600 selection:text-white bg-[#e0e0e0] text-zinc-900 overflow-x-hidden">
       {/* Header / Nav */}
       <nav className="fixed top-0 w-full z-50 bg-[#e0e0e0]/80 backdrop-blur-md shadow-[0_4px_12px_#b8b8b8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          <span className="font-black text-2xl sm:text-3xl tracking-tighter uppercase italic text-blue-600">ZMaps</span>
-          <Button variant="secondary" className="hidden sm:block !py-2 !px-6 !text-xs !shadow-[4px_4px_8px_#b8b8b8,-4px_-4px_8px_#ffffff]" onClick={scrollToEvaluate}>
-            Avaliação Grátis
-          </Button>
-        </div>
-      </nav>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    
+    {/* Lado Esquerdo: Novo Logo e Slogan */}
+    <div className="flex items-center gap-4">
+      {/* Logo Z oficial do seu app  */}
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-700 via-indigo-600 to-purple-700 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30 transform -rotate-3 hover:rotate-0 transition-all duration-300 border border-white/20">
+        <span className="text-white font-black text-2xl sm:text-3xl font-serif italic drop-shadow-md select-none">Z</span> 
+      </div>
+      
+      {/* Novo Nome e Slogan */}
+      <div className="flex flex-col">
+        <span className="font-black text-xl sm:text-2xl tracking-tighter uppercase italic text-zinc-900 leading-none">
+          ZMaps
+        </span>
+        <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-blue-600 leading-none mt-1">
+          Guarujá
+        </span>
+      </div>
+    </div>
+
+    {/* Lado Direito: Botão mantido */}
+    <Button 
+      variant="secondary" 
+      className="hidden sm:block !py-2 !px-6 !text-xs !shadow-[4px_4px_8px_#b8b8b8,-4px_-4px_8px_#ffffff]" 
+      onClick={scrollToEvaluate}
+    >
+      Avaliação Grátis
+    </Button>
+  </div>
+</nav>
 
       {/* Hero Section */}
       <section className="pt-32 md:pt-48 pb-12 md:pb-24 px-4 sm:px-6">

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from './Button'; // OK (estão na mesma pasta)
 import { analyzeRestaurantPresence } from './aiService'; // MUDOU: tire os .. e a pasta services
-import { EvaluationStep } from '../types';
+import { EvaluationStep, type EvaluationStepType } from '../types';
 
 export const EvaluationTool: React.FC = () => {
 const [step, setStep] = useState<EvaluationStepType>(EvaluationStep.Input);

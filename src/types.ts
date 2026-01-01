@@ -1,10 +1,9 @@
 export const EvaluationStep = {
-  Input: 'input',
-  Analyzing: 'analyzing',
-  Result: 'result'
+  IDLE: 'input',
+  ANALYZING: 'analyzing',
+  RESULT: 'result'
 } as const;
 
-// Isso aqui cria o tipo automaticamente baseado no objeto acima
 export type EvaluationStepType = typeof EvaluationStep[keyof typeof EvaluationStep];
 
 export interface EvaluationData {

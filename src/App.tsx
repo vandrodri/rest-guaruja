@@ -1,6 +1,7 @@
 import './index.css';
 import React from 'react';
 import { EvaluationTool } from './components/EvaluationTool';
+import { Footer } from './components/Footer';
 import { Button } from './components/Button';
 
 const App: React.FC = () => {
@@ -46,8 +47,8 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section className="pt-32 md:pt-48 pb-12 md:pb-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center space-y-8 md:space-y-12">
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1] md:leading-[1.05] uppercase italic text-zinc-900 break-words">
-  A temporada do Guarujá começou. Seu restaurante vai <span className="text-blue-600">lucrar</span> ou apenas observar?
+          <h1 className="text-4xl sm:text-7xl lg:text-8xl font-black uppercase italic text-zinc-900 leading-[1.15] tracking-tight">
+  A temporada do <span className="text-blue-600">Guarujá</span> começou...
 </h1>
           <p className="text-lg md:text-2xl text-zinc-600 font-bold max-w-3xl mx-auto leading-tight">
             O Google Maps mudou. Se você não está seguindo as novas diretrizes, você está invisível para os turistas.

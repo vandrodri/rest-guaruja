@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedReport } from './FormattedReport';
 import { Button } from './Button';
 import { analyzeRestaurantPresence } from './aiService';
 import { EvaluationStep, type EvaluationStepType } from '../types';
@@ -100,10 +101,12 @@ export const EvaluationTool: React.FC = () => {
           </div>
           
           <div className="w-full">
-            <div className="whitespace-pre-wrap text-zinc-800 font-medium leading-relaxed text-lg font-sans bg-[#e0e0e0] shadow-[inset_4px_4px_12px_#b8b8b8,inset_-4px_-4px_12px_#ffffff] p-6 md:p-14 rounded-[2.5rem] h-auto min-h-[400px] overflow-visible mb-16">
-              {analysis}
-            </div>
-          </div>
+  <FormattedReport 
+    analysis={analysis}
+    restaurantName={restaurantName}
+  />
+</div>
+   
 
           <div className="pt-24 border-t border-zinc-300 space-y-12">
             <div className="bg-[#e0e0e0] shadow-[8px_8px_16px_#b8b8b8,-8px_-8px_16px_#ffffff] p-8 md:p-16 rounded-[3.5rem] text-center space-y-10 border-2 border-blue-600/10">

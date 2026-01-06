@@ -1,11 +1,19 @@
-
 import React, { useState, useEffect } from 'react';
+import { LegalModal } from './LegalModal';
 
 export const Footer: React.FC = () => {
   const [showCookieConsent, setShowCookieConsent] = useState(false);
+  const [modalConfig, setModalConfig] = useState<{ 
+    isOpen: boolean; 
+    title: string; 
+    content: React.ReactNode 
+  }>({
+    isOpen: false,
+    title: '',
+    content: null
+  });
 
   useEffect(() => {
-    // Verifica se já aceitou cookies (simulação simples com localStorage)
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
       setShowCookieConsent(true);
@@ -17,91 +25,76 @@ export const Footer: React.FC = () => {
     setShowCookieConsent(false);
   };
 
+  const openModal = (type: 'termos' | 'privacidade' | 'lgpd') => {
+    const contents = {
+      termos: {
+        title: 'Termos de Uso',
+        content: (
+          <div className="space-y-4">
+            <p><strong>1. Aceitação:</strong> Ao usar o ZMaps, você concorda com nossos termos.</p>
+            <p><strong>2. Uso do Serviço:</strong> Nossa IA processa dados públicos para otimização de negócios locais.</p>
+            <p><strong>3. Responsabilidade:</strong> Não garantimos resultados financeiros fixos, pois dependem do mercado.</p>
+          </div>
+        )
+      },
+      privacidade: {
+        title: 'Política de Privacidade',
+        content: (
+          <div className="space-y-4">
+            <p><strong>1. Dados:</strong> Coletamos apenas o necessário para o funcionamento da plataforma.</p>
+            <p><strong>2. Segurança:</strong> Seus dados são criptografados e nunca vendidos a terceiros.</p>
+            <p><strong>3. Cookies:</strong> Usamos cookies para melhorar sua navegação.</p>
+          </div>
+        )
+      },
+      lgpd: {
+        title: 'Conformidade LGPD',
+        content: (
+          <div className="space-y-4">
+            <p>Estamos em conformidade com a Lei Geral de Proteção de Dados.</p>
+            <p>Você pode solicitar a exclusão de seus dados enviando um e-mail para <strong>zapy@zapy.click</strong>.</p>
+          </div>
+        )
+      }
+    };
+
+    setModalConfig({ isOpen: true, ...contents[type] });
+  };
+
   return (
     <>
-      {/* RODAPÉ PRINCIPAL */}
+      <style>{`
+        footer ul li { display: list-item !important; list-style: none !important; }
+        footer ul li a { display: inline !important; white-space: normal !important; }
+      `}</style>
+
       <footer className="bg-white border-t border-slate-200 mt-auto">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="max-w-7xl mx-auto px-6 py-10">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
             
-            {/* Coluna 1: Marca e Slogan */}
-            <div className="col-span-1 md:col-span-1">
-               <div className="flex items-center gap-2 mb-4">
-                 <div className="w-8 h-8 bg-gradient-to-br from-blue-700 via-indigo-600 to-purple-700 rounded-lg flex items-center justify-center shadow-md transform -rotate-3">
-                    <span className="text-white font-black text-xl font-serif italic">Z</span>
-                 </div>
-                 <span className="text-xl font-bold text-slate-800">ZMaps</span>
+            <div className="max-w-xs">
+               <div className="flex items-center gap-2 mb-3">
+                 <div className="w-7 h-7 bg-gradient-to-br from-blue-700 via-indigo-600 to-purple-700 rounded-lg flex items-center justify-center shadow-md transform -rotate-3 text-white font-black italic">Z</div>
+                 <span className="text-lg font-bold text-slate-800">ZMaps</span>
                </div>
-               <p className="text-sm text-slate-500 leading-relaxed mb-4">
-                 Potencialize seu negócio local com inteligência artificial e estratégias baseadas em dados reais do Google Maps.
-               </p>
+               <p className="text-xs text-slate-500">Inteligência artificial para estratégias baseadas no Google Maps.</p>
             </div>
 
-            {/* Coluna 2: Contato */}
-            <div className="col-span-1">
-              <h4 className="font-bold text-slate-800 mb-4 uppercase text-xs tracking-wider">Contato</h4>
-              <ul className="space-y-3 text-sm text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="text-indigo-500">🌐</span>
-                  <a href="https://zapy.click" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">
-                    zapy.click
-                  </a>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-indigo-500">📧</span>
-                  <a href="mailto:zapy@zapy.click" className="hover:text-indigo-600 transition-colors">
-                    zapy@zapy.click
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Coluna 3: Links Legais */}
-            <div className="col-span-1">
-              <h4 className="font-bold text-slate-800 mb-4 uppercase text-xs tracking-wider">Legal</h4>
-              <ul className="space-y-3 text-sm text-slate-600">
-                <li>
-                  <a href="#" className="hover:text-indigo-600 transition-colors">Termos de Uso</a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-indigo-600 transition-colors">Política de Privacidade</a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-indigo-600 transition-colors">LGPD</a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Coluna 4: Social */}
-            <div className="col-span-1">
-               <h4 className="font-bold text-slate-800 mb-4 uppercase text-xs tracking-wider">Siga-nos</h4>
-               <div className="flex gap-4">
-                  {/* Instagram */}
-                  <a href="https://www.instagram.com/zapy.click/" className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-pink-50 hover:text-pink-600 hover:border-pink-200 transition-all">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                  </a>
-                  {/* Facebook */}
-                  <a href="https://www.facebook.com/profile.php?id=61581472642902" className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-all">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-                  </a>
-                  {/* YouTube */}
-                  <a href="https://www.youtube.com/channel/UCkMaKAzAY-u1kB-bSho1BQw" className="w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                  </a>
-               </div>
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
+                <button onClick={() => openModal('termos')} className="text-xs font-semibold text-slate-600 hover:text-indigo-600 uppercase tracking-widest transition-colors">Termos</button>
+                <button onClick={() => openModal('privacidade')} className="text-xs font-semibold text-slate-600 hover:text-indigo-600 uppercase tracking-widest transition-colors">Privacidade</button>
+                <button onClick={() => openModal('lgpd')} className="text-xs font-semibold text-slate-600 hover:text-indigo-600 uppercase tracking-widest transition-colors">LGPD</button>
             </div>
           </div>
 
-          <div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
-             <p>&copy; 2024 Zapy Marketing Local. Todos os direitos reservados.</p>
-             <p className="flex gap-4">
-                <span>ZMaps AI Suite v1.0</span>
-             </p>
+          <div className="border-t border-slate-100 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-400 uppercase tracking-widest">
+             <p>&copy; 2026 Zapy Marketing Local. Todos os direitos reservados.</p>
+             <span className="bg-slate-50 px-2 py-1 rounded border border-slate-100">ZMaps AI Suite v1.0</span>
           </div>
         </div>
       </footer>
 
-      {/* AVISO DE COOKIES */}
+   {/* AVISO DE COOKIES */}
       {showCookieConsent && (
         <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-fade-in-up">
             <div className="max-w-4xl mx-auto bg-slate-900/95 backdrop-blur shadow-2xl rounded-2xl p-4 md:p-6 border border-slate-700 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -112,7 +105,7 @@ export const Footer: React.FC = () => {
                     <div>
                         <p className="text-white font-bold text-sm mb-1">Respeitamos sua privacidade</p>
                         <p className="text-slate-300 text-xs md:text-sm">
-                            Utilizamos cookies para melhorar sua experiência no ZMaps e analisar nosso tráfego. 
+                            Utilizamos cookies para melhorar sua experiência e analisar nosso tráfego. 
                             Ao continuar, você concorda com nossa <a href="#" className="text-indigo-400 underline hover:text-indigo-300">Política de Privacidade</a>.
                         </p>
                     </div>
